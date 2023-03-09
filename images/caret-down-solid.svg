@@ -1,0 +1,30 @@
+<svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG Editor - http://github.com/mzalive/SVG Editor/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <!-- Created with SVG Editor - http://github.com/mzalive/SVG Editor/ -->
+  <g stroke="null" id="svg_15">
+   <g stroke="null" transform="matrix(0.9944280151988618,0,0,0.9906582575411677,-5166.948662514359,-3549.646358614135) " id="svg_12">
+    <title stroke="null" transform="translate(0.0000040758259274298325,4.547473508864641e-13) translate(0.0000040758259274298325,4.547473508864641e-13) translate(0.3808634877204895,4.547473508864641e-13) translate(5197.52490234375,0) translate(0,3584.5) ">background</title>
+    <rect stroke="null" x="5196.905774" y="3583.5" width="582" height="402" id="svg_10" fill="#fff"/>
+    <g stroke="null" id="svg_9" display="none">
+     <rect stroke="null" id="svg_13" width="580" height="400" x="5197.905774" y="3584.5" stroke-width="0" fill="url(#gridpattern)"/>
+    </g>
+   </g>
+   <g stroke="null" transform="matrix(0.9944280151988618,0,0,0.9906582575411677,-5166.948662514359,-3549.646358614135) " id="svg_14">
+    <title stroke="null" transform="translate(0.0000040758259274298325,4.547473508864641e-13) translate(0.0000040758259274298325,4.547473508864641e-13) translate(0.3808634877204895,4.547473508864641e-13) translate(5197.52490234375,0) translate(0,3584.5) ">Layer 1</title>
+    <g stroke="null" id="svg_7">
+     <path stroke="null" fill="#6f6e6f" d="m5465.570694,3769.86025l44.67014,0c3.09028,0 4.63542,3.73264 2.44792,5.92014l-22.32639,22.34375c-1.35417,1.35416 -3.55903,1.35416 -4.91319,0l-22.32639,-22.34375c-2.1875,-2.1875 -0.64236,-5.92014 2.44792,-5.92014l-0.00001,0z" id="svg_8"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

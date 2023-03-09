@@ -1,0 +1,182 @@
+$brand-color: #f16d7f;
+
+.subscribe-background {
+  background: url(../images/subscribe-background.png) no-repeat center bottom,
+    #ccc;
+  background-size: cover;
+  min-height: 438px;
+  margin: 0 auto;
+  margin-top: 97px;
+  background-color: #f2f2f2;
+}
+.subscribe-container {
+  margin: 0 auto;
+  min-height: inherit;
+  width: 1140px;
+  display: flex;
+  justify-content: space-between;
+}
+.review {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  height: inherit;
+  border-right: 1px solid white;
+}
+
+.review-text {
+  width: 459px;
+}
+.review-text blockquote {
+  margin: 0 72px 0 0;
+  color: #222224;
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  line-height: 26px;
+}
+.review-text p {
+  color: #222224;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  line-height: 14px;
+}
+.review-text span {
+  width: 82px;
+  color: $brand-color;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 26px;
+}
+.switch {
+  width: 140px;
+  display: flex;
+  justify-content: space-between;
+}
+.switch div {
+  width: 38px;
+  height: 4px;
+  background-color: #d6d6d6;
+  margin-top: 41px;
+}
+.switch div:hover {
+  background-color: $brand-color;
+  cursor: pointer;
+}
+.e-mail {
+  width: 50%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.e-mail p {
+  color: #222224;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.35px;
+  line-height: 24px;
+}
+.e-mail span {
+  font-size: 24px;
+  letter-spacing: 0.6px;
+  line-height: 54px;
+  text-transform: uppercase;
+}
+.e-mail form {
+  margin-top: 35px;
+}
+.e-mail form input {
+  float: left;
+  padding-left: 28px;
+  border: 0;
+  width: 334px;
+  height: 44px;
+  border-top-left-radius: 23px;
+  border-bottom-left-radius: 23px;
+  background-color: #e1e1e1;
+}
+.e-mail form input:focus {
+  outline: none;
+}
+.e-mail form button {
+  border: 0;
+  width: 104px;
+  height: 46px;
+  border-radius: 0 23px 23px 0;
+  background-color: $brand-color;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 0px;
+  letter-spacing: 0.35px;
+  text-align: center;
+  cursor: pointer;
+}
+.footer-wrap {
+  width: 1140px;
+  height: 321px;
+  margin: 0 auto;
+  margin-top: 123px;
+  display: flex;
+  justify-content: space-between;
+}
+.footer a {
+  text-decoration: none;
+  color: #898989;
+}
+.brand-text {
+  width: 427px;
+  height: 180px;
+  overflow: hidden;
+  color: #898989;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  letter-spacing: 0.35px;
+}
+.caption {
+  margin: 0;
+  color: $brand-color;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.45px;
+}
+.footer-menu {
+  padding: 0;
+  list-style-type: none;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  line-height: 42px;
+}
+.footer-bottom-container {
+  background-color: #e6e6e6;
+}
+.footer-bottom {
+  width: 1140px;
+  height: 79px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.copyrights {
+  color: #7a7a7a;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 42px;
+  letter-spacing: 0.4px;
+}
+.social-links {
+  width: 192px;
+  display: flex;
+  justify-content: space-between;
+}
