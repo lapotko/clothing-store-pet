@@ -1,40 +1,41 @@
-//TODO СВЕРСТАТЬ КОРЗИНУ. ПАРСИТЬ В НЕЁ ДАННЫЕ С УДАЛЕННОГО РЕСУРСА, КОРЗИНА СКРЫВАЕТСЯ/ПОЯВЛЯЕТСЯ ПРИ НАЖАТАТИИ НА КНОПКУ "КОРЗИНА" *МЕТОДЫ ДОБАВЛЕНИЯ/УДАЛЕНИЯ ТОВАРОВ ИЗ КОРЗИНЫ
+//TODO *МЕТОДЫ ДОБАВЛЕНИЯ/УДАЛЕНИЯ ТОВАРОВ ИЗ КОРЗИНЫ
 
 const API = "https://raw.githubusercontent.com/lapotko/online-store-api/master/responses/";
 
 class ProductList {
-    constructor(container = ".products-img") {
-        this.container = container;
-        this.goods = [];
-        this._fetchProduct().then((data) => {
-            this.goods = [...data];
-            this.render();
-        });
-    }
+  constructor(container = ".products-img") {
+    this.container = container;
+    this.goods = [];
+    this._fetchProduct().then((data) => {
+      this.goods = [...data];
+      this.render();
+    });
+  }
 
-    _fetchProduct() {
-        return fetch(`${API}/catalogData.json`).then((result) => result.json());
-    }
+  _fetchProduct() {
+    return fetch(`${API}/catalogData.json`).then((result) => result.json());
+  }
 
-    render() {
-        const block = document.querySelector(this.container);
-        for (let unit of this.goods) {
-            let item = new ProductItem(unit);
-            block.insertAdjacentHTML("beforeend", item.render());
-        }
+  render() {
+    const block = document.querySelector(this.container);
+    for (let unit of this.goods) {
+      let item = new ProductItem(unit);
+      block.insertAdjacentHTML("beforeend", item.render());
+      item.addToCart();
     }
+  }
 }
 
 class ProductItem {
-    constructor(product, src = "images/") {
-        this.title = product.name;
-        this.price = product.price;
-        this.id = product.id;
-        this.src = src;
-    }
+  constructor(product, src = "images/") {
+    this.title = product.name;
+    this.price = product.price;
+    this.id = product.id;
+    this.src = src;
+  }
 
-    render() {
-        return `
+  render() {
+    return `
         <figure class="product-p">
         <a href="#">
         <img src="${this.src}products-image${this.id}.png" alt="image" />
@@ -48,67 +49,72 @@ class ProductItem {
         </a>
       </figure>
         `;
-    }
+  }
+  addToCart() {
+    let buyButtons = [...document.getElementsByTagName(`button`)];
+    let button = buyButtons.find((element) => element.dataset["id"] == this.id);
+    button.addEventListener("click", () => console.log("типа добавил в корзину товар " + this.title));
+  }
 }
 
 class Cart {
-    constructor(container = ".cart-group") {
-        this.container = container;
-        this.cartGoods = [];
-        this._showHideCart();
-        this._getCartList()
-            .then((data) => {
-                this.cartGoods = [...data.contents];
-                this._renderCart();
-                this._totalCart();
-            })
-            .catch((error) => console.log(error));
-    }
+  constructor(container = ".cart-group") {
+    this.container = container;
+    this.cartGoods = [];
+    this._showHideCart();
+    this._getCartList()
+      .then((data) => {
+        this.cartGoods = [...data.contents];
+        this._renderCart();
+        this._totalCart();
+      })
+      .catch((error) => console.log(error));
+  }
 
-    _showHideCart() {
-        let cartImg = document.querySelector(".headerCart");
-        let cartContent = document.querySelector(".cart");
-        cartImg.addEventListener("click", () => {
-            cartContent.classList.toggle("hidden");
-        });
-    }
+  _showHideCart() {
+    let cartImg = document.querySelector(".headerCart");
+    let cartContent = document.querySelector(".cart");
+    cartImg.addEventListener("click", () => {
+      cartContent.classList.toggle("hidden");
+    });
+  }
 
-    _getCartList() {
-        return fetch(`${API}getBasket.json`)
-            .then((result) => result.json())
-            .catch((error) => console.log(error));
-    }
+  _getCartList() {
+    return fetch(`${API}getBasket.json`)
+      .then((result) => result.json())
+      .catch((error) => console.log(error));
+  }
 
-    _totalCart() {
-        let total_wrap = document.querySelector(".cart-summary__value");
-        let total = 0;
-        this.cartGoods.forEach((item) => {
-            let unit = new CartItem(item);
-            total += unit.price;
-        });
-        total_wrap.textContent = total + " ₽";
-    }
+  _totalCart() {
+    let total_wrap = document.querySelector(".cart-summary__value");
+    let total = 0;
+    this.cartGoods.forEach((item) => {
+      let unit = new CartItem(item);
+      total += unit.price;
+    });
+    total_wrap.textContent = total + " ₽";
+  }
 
-    _renderCart() {
-        let cartBlock = document.querySelector(this.container);
-        this.cartGoods.forEach((item) => {
-            let unit = new CartItem(item);
-            cartBlock.insertAdjacentHTML("beforeend", unit.renderItem());
-        });
-    }
+  _renderCart() {
+    let cartBlock = document.querySelector(this.container);
+    this.cartGoods.forEach((item) => {
+      let cartUnit = new CartItem(item);
+      cartBlock.insertAdjacentHTML("beforeend", cartUnit.renderItem());
+    });
+  }
 }
 
 class CartItem {
-    constructor(product, src = "images/") {
-        this.title = product.name;
-        this.price = product.price;
-        this.id = product.id;
-        this.quantity = product.quantity;
-        this.src = src;
-    }
+  constructor(product, src = "images/") {
+    this.title = product.name;
+    this.price = product.price;
+    this.id = product.id;
+    this.quantity = product.quantity;
+    this.src = src;
+  }
 
-    renderItem() {
-        return `
+  renderItem() {
+    return `
     <div class="cart-product">
     <div class="cart-product__img-container">
       <img class="cart-product__img" src="${this.src}products-image${this.id}.png" alt="Здесь должна быть картинка" />
@@ -128,7 +134,7 @@ class CartItem {
   </div>
       
         `;
-    }
+  }
 }
 
 let list = new ProductList();
