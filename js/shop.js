@@ -95,7 +95,6 @@ class Cart {
     });
     total_wrap.textContent = total + " ₽";
   }
-
   _renderCart() {
     let cartBlock = document.querySelector(this.container);
     this.cartGoods.forEach((item) => {
@@ -104,15 +103,16 @@ class Cart {
     });
   }
   addToCart(element) {
-    console.log(this.id);
     // Нужно проверить есть ли такой товар в массиве cartGoods
     // Если есть - увеличить количество, если нет - добавить.
-    /* document.querySelector(".products-img").addEventListener("click", (e) => {
-      if (e.target.classList.contains("buy_button")) {
-        e.preventDefault();
-        console.log('Это кнопка "Купить"');
-      }
-    }); */
+    let productId = +element.dataset["id"];
+    let productInCart = this.cartGoods.find((el) => el.id === productId);
+    if (productInCart) {
+      productInCart.quantity++;
+      console.log(productInCart.quantity);
+      this._renderCart();
+    } else {
+    }
   }
 }
 
@@ -127,7 +127,7 @@ class CartItem {
 
   renderItem() {
     return `
-    <div class="cart-product">
+    <div class="cart-product" >
     <div class="cart-product__img-container">
       <img class="cart-product__img" src="${this.src}products-image${this.id}.png" alt="Здесь должна быть картинка" />
     </div>
