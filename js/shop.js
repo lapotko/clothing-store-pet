@@ -3,8 +3,9 @@
 const API = "https://raw.githubusercontent.com/lapotko/online-store-api/master/responses/";
 
 class ProductList {
-  constructor(container = ".products-img") {
+  constructor(cart, container = ".products-img") {
     this.container = container;
+    this.cart = cart;
     this.goods = [];
     this._fetchProduct().then((data) => {
       this.goods = [...data];
@@ -21,8 +22,13 @@ class ProductList {
     for (let unit of this.goods) {
       let item = new ProductItem(unit);
       block.insertAdjacentHTML("beforeend", item.render());
-      item.addToCart();
     }
+    block.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (e.target.classList.contains("buy_button")) {
+        this.cart.addToCart(e.target);
+      }
+    });
   }
 }
 
@@ -49,11 +55,6 @@ class ProductItem {
         </a>
       </figure>
         `;
-  }
-  addToCart() {
-    let buyButtons = [...document.getElementsByTagName(`button`)];
-    let button = buyButtons.find((element) => element.dataset["id"] == this.id);
-    button.addEventListener("click", () => console.log("типа добавил в корзину товар " + this.title));
   }
 }
 
@@ -102,6 +103,17 @@ class Cart {
       cartBlock.insertAdjacentHTML("beforeend", cartUnit.renderItem());
     });
   }
+  addToCart(element) {
+    console.log(this.id);
+    // Нужно проверить есть ли такой товар в массиве cartGoods
+    // Если есть - увеличить количество, если нет - добавить.
+    /* document.querySelector(".products-img").addEventListener("click", (e) => {
+      if (e.target.classList.contains("buy_button")) {
+        e.preventDefault();
+        console.log('Это кнопка "Купить"');
+      }
+    }); */
+  }
 }
 
 class CartItem {
@@ -136,6 +148,6 @@ class CartItem {
         `;
   }
 }
-
-let list = new ProductList();
 let cart = new Cart();
+let list = new ProductList(cart);
+console.log(list);
