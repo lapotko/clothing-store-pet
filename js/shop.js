@@ -1,4 +1,4 @@
-//TODO *МЕТОДЫ ДОБАВЛЕНИЯ/УДАЛЕНИЯ ТОВАРОВ ИЗ КОРЗИНЫ
+//TODO *1. метод удаления товара из корзины. 2. если корзина пуста, добавить товар
 
 const API = "https://raw.githubusercontent.com/lapotko/online-store-api/master/responses/";
 
@@ -90,8 +90,7 @@ class Cart {
     let total_wrap = document.querySelector(".cart-summary__value");
     let total = 0;
     this.cartGoods.forEach((item) => {
-      let unit = new CartItem(item);
-      total += unit.price;
+      total += item.price * item.quantity;
     });
     total_wrap.textContent = total + " ₽";
   }
@@ -109,25 +108,31 @@ class Cart {
     let productInCart = this.cartGoods.find((el) => el.id === productId);
     if (productInCart) {
       productInCart.quantity++;
-      console.log(productInCart.quantity);
-      this._renderCart();
+      console.log(this.cartGoods);
+      this._refreshCart(productInCart);
     } else {
     }
+  }
+  _refreshCart(product) {
+    let block = document.querySelector(`.cart-product[data-id = "${product.id}"]`);
+    block.querySelector(".quantity").textContent = product.quantity;
+    block.querySelector(".cart-product__price").textContent = +(product.quantity * product.price);
+    this._totalCart();
   }
 }
 
 class CartItem {
   constructor(product, src = "images/") {
     this.title = product.name;
-    this.price = product.price;
+    this.price = +product.price;
     this.id = product.id;
-    this.quantity = product.quantity;
+    this.quantity = +product.quantity;
     this.src = src;
   }
 
   renderItem() {
     return `
-    <div class="cart-product" >
+    <div class="cart-product" data-id="${this.id}" >
     <div class="cart-product__img-container">
       <img class="cart-product__img" src="${this.src}products-image${this.id}.png" alt="Здесь должна быть картинка" />
     </div>
@@ -135,9 +140,9 @@ class CartItem {
       <div class="cart-product__text">
         <div class="cart-product__product-text">
           <div class="cart-product__name">${this.title}</div>
-          <span class="quantity">Количество: ${this.quantity}</span>
+         <span>Количество: </span> <span class="quantity">${this.quantity}</span><span> шт.</span>
           <div class="cart-product__product-delete">
-            <div class="cart-product__price">$${this.price}</div>
+            <div class="cart-product__price">${this.price} <span>$</span></div>
             <button class="cart-product__delete"></button>
           </div>
         </div>
@@ -150,4 +155,3 @@ class CartItem {
 }
 let cart = new Cart();
 let list = new ProductList(cart);
-console.log(list);
